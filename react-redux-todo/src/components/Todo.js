@@ -1,10 +1,18 @@
 import React from "react"
 import { connect } from 'react-redux'
 import { delTodo } from '../store'
+import { Link } from "react-router-dom";
 
-function Todo ({todo, dDelTodo}) {
+
+function Todo ({todo, dDelTodo, id}) {
+    console.log(todo)
     return (
-        <li id={todo.id}>{todo.todo} <button onClick={dDelTodo}>DEL</button></li>
+        <li>
+            <Link to={`/${id}`}>
+                {todo} 
+            </Link>
+            <button onClick={dDelTodo}>DEL</button>
+        </li>
     )
 }
 

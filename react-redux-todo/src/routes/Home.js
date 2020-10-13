@@ -24,7 +24,7 @@ function Home(props) {
         <ul>
             {state.map(todo => {
                 return (
-                    <Todo todo={todo} key={todo.id} />
+                    <Todo {...todo} key={todo.id} />
                 )
             })}
         </ul>
