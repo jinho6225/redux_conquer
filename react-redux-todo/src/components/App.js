@@ -5,12 +5,10 @@ import Detail from '../routes/Detail'
 
 function App() {
   return (
-    <>
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/:id" component={Detail} />
       </Router>
-    </>
   );
 }
 
