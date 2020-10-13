@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
+import { configureStore, createAction, createReducer } from '@reduxjs/toolkit'
 const val = document.querySelector("#value")
 const PlusBtn = document.querySelector("#increment")
 const MinusBtn = document.querySelector("#decrement")
@@ -6,50 +7,35 @@ const ifOddBtn = document.querySelector("#incrementIfOdd")
 const ifAsyncBtn = document.querySelector("#incrementAsync")
 
 // 액션 타입 정의
-const ADD = 'ADD'
-const MINUS = 'MINUS'
-
 // 액션 생성함수 정의
-const increment = diff => ({ type: ADD, diff });
-const decrement = () => ({ type: MINUS });
-
+const increment = createAction('INCREMENT')
+const decrement = createAction('DECREMENT')
 // 초깃값 설정
-const initialState = {
-    value: 0
-}
+const reducer = createReducer(0, {
+    [increment]: state => state + 1,
+    [decrement]: state => state - 1
+  })
 
-const reducer = (state = initialState, action) => {
-    if (action.type === ADD) {
-        return {
-            ...state,
-            value: state.value + action.diff
-        }
-    } else if (action.type === MINUS) {
-        return {
-            ...state,
-            value: state.value - 1
-        }
-    } else {
-        return state
-    }
-}
+const store = configureStore({
+    reducer
+})
 
-const store = createStore(reducer)
+
 function render() {
-    val.innerHTML = store.getState().value
+    val.innerHTML = store.getState()
 }
 render()
 
 store.subscribe(render)
 
 PlusBtn.addEventListener('click', () => {
-    store.dispatch(increment(3))
+    store.dispatch(increment())
 })
 MinusBtn.addEventListener('click', () => {
     store.dispatch(decrement())
 })
 ifOddBtn.addEventListener('click', () => {
-    if (store.getState().value % 2 === 1) {
+    if (store.getState() % 2 === 1) {
         store.dispatch(increment(1))
     }
 })
