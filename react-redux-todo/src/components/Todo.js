@@ -4,9 +4,7 @@ import { delTodo } from '../store'
 import { Link } from "react-router-dom";
 
 
-function Todo ({todo, dDelTodo, id}) {
-    console.log(todo)
-    return (
+function Todo ({todo, dDelTodo, id}) {    return (
         <li>
             <Link to={`/${id}`}>
                 {todo} 
@@ -18,7 +16,7 @@ function Todo ({todo, dDelTodo, id}) {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        dDelTodo: () => dispatch(delTodo(ownProps.todo.id))
+        dDelTodo: () => dispatch(delTodo(ownProps.id))
     }
 }
 

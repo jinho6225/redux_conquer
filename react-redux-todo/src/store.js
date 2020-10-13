@@ -26,7 +26,7 @@ function reducer(state = [], action) {
                 }
             ]
         case DEL:
-            return state.filter(todo => todo.id !== parseInt(action.id))
+            return state.filter(todo => todo.id !== action.id)
         default:
             return state
     }
